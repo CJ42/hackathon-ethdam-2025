@@ -1,9 +1,11 @@
 name: 🐳 Publish Docker Image
 
 on: [push]
+env:
+    BRIDGE_RUNNER_TOKEN: ${{ secrets.BRIDGE_RUNNER_TOKEN }}
 
 jobs:
-  publish-hello-docker-image:
+  publish-encrypted-bridge-docker-image:
     runs-on: ubuntu-latest  
     steps:
       - uses: actions/checkout@v4
