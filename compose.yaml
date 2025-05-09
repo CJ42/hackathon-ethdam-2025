@@ -1,0 +1,9 @@
+services:
+  python-telegram-bot:
+    build: .
+    image: "ghcr.io/cj42/oasis-hyperlane-encrypted-bridge-demo"
+    platform: darwin/amd64
+    environment:
+      - TOKEN=${TOKEN}
+    # ports: TODO next
+    

@@ -1,0 +1,22 @@
+name: 🐳 Publish Docker Image
+
+on: [push]
+
+jobs:
+  publish-hello-docker-image:
+    runs-on: ubuntu-latest  
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build the Bridge Docker image
+        run: |
+          docker build . --tag ghcr.io/CJ42/hackathon-ethdam-2025:latest
+          docker run ghcr.io/CJ42/hackathon-ethdam-2025:latest
+          docker push ghcr.io/CJ42/hackathon-ethdam-2025:latest
