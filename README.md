@@ -1,8 +1,8 @@
-# PrivaMailer
+# PrivaMail
 
 > An encrypted messaging protocol built on Oasis network with Hyperlane mailboxes.
 
-![Logo PrivaMailer](./PrivaMailer-logo.png)
+![Logo PrivaMail](./PrivaMail-logo.png)
 
 ## Stack used
 
@@ -14,10 +14,10 @@
 | Hyperlane | Bridge tech stack used (integration with Oasis) |
 |   - smart contracts | Mailbox and custom contracts to send / receive messages |
 |   - UI | Hyperlane warp website template (modified to receive input text field only) |
-
+git
 ## Description 
 
-PrivaMailer is a full-on e2e encrypted mailer system over EVM p2p networks. It features the following privacy features 🥷🏻✨
+PrivaMail is a full-on e2e encrypted mailer system over EVM p2p networks. It features the following privacy features 🥷🏻✨
 
 - Leverage built-in smart contract encryption on the Sapphire network.
 - ROFL app that computes privacy encryption / decryption (off-chain on target network).
