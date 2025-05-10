@@ -25,8 +25,11 @@ yarn install && yarn build
 export HYP_KEY='<YOUR_PRIVATE_KEY>'
 ```
 
-5. Run the relayer
+5. Run the relayer with these parameters
 
 ```
-yarn workspace @hyperlane-xyz/cli hyperlane relayer --chains sapphiretestnet,sepolia
+yarn workspace @hyperlane-xyz/cli hyperlane relayer \
+    --chains sepolia,sapphiretestnet \
+    --key 0x<your-relayer-private-key> \
+    --verbosity debug
 ```

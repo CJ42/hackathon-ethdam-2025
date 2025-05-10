@@ -31,13 +31,13 @@ contract PrivaMailClient is HyperlaneRouter {
     event SentMail(
         uint32 indexed origin,
         uint32 indexed destination,
-        string message // publish the encrypted bytes calldata message
+        bytes message // publish the encrypted bytes calldata message
     );
     event ReceivedMail(
         uint32 indexed origin,
         uint32 indexed destination,
         bytes32 sender,
-        string message
+        bytes message
     );
 
     // ============ State variables ============
@@ -83,13 +83,24 @@ contract PrivaMailClient is HyperlaneRouter {
         return string(_message);
     }
 
+    /**
+     * @notice Fetches the amount of gas that will be used when a message is
+     * dispatched to the given chain Id.
+     */
+    function quoteDispatch(
+        uint32 _destinationChainId,
+        bytes calldata message
+    ) external view returns (uint256) {
+        return _quoteDispatch(_destinationChainId, message);
+    }
+
     /// @notice Sends a message to the _destinationDomain. Any msg.value is used as interchain gas payment.
     /// @dev function to send messages cross-chain (can only be triggered by the contract owner)
     /// @param destinationDomain The destination domain to send the message to.
     /// @param message The message to send.
     function sendMessage(
         uint32 destinationDomain,
-        string calldata message
+        bytes calldata message
     ) external payable onlyOwner {
         // checks performed in modifier...
 
@@ -98,7 +109,7 @@ contract PrivaMailClient is HyperlaneRouter {
 
     function _sendMessage(
         uint32 destinationDomain,
-        string memory message
+        bytes memory message
     ) internal {
         // effects..
         sent++;
@@ -131,12 +142,7 @@ contract PrivaMailClient is HyperlaneRouter {
         // effects...
         received++;
         receivedFrom[origin]++;
-        emit ReceivedMail(
-            origin,
-            mailbox.localDomain(),
-            sender,
-            string(_message)
-        );
+        emit ReceivedMail(origin, mailbox.localDomain(), sender, message);
 
         // no interactions or external calls...
 

@@ -1,5 +1,13 @@
 {
-  "name": "hardhat-project",
+  "name": "privamail-contracts",
+  "author": "Jean Cavallera <CJ42>",
+  "scripts": {
+    "build": "hardhat compile",
+    "privamail:create": "npx hardhat run scripts/deployPrivaMailClient.ts",
+    "privamail:receive": "npx hardhat run scripts/listenMessages.ts",
+    "privamail:connect": "npx hardhat run scripts/connectPrivaMailClients.ts ",
+    "privamail:send": "npx hardhat run scripts/sendMessage.ts"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
     "@oasisprotocol/sapphire-hardhat": "^2.22.2",

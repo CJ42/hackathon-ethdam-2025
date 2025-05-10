@@ -1,14 +1,14 @@
 import hre, { viem } from "hardhat";
 
-const SEPOLIA_CHAIN_ID = 11155111;
-const SAPPHIRE_CHAIN_ID = 23295;
+import {
+  SEPOLIA_CHAIN_ID,
+  SAPPHIRE_CHAIN_ID,
+  privaMailSepolia,
+  privaMailSapphire,
+} from "./utils";
 
 async function main() {
   const [walletClient] = await viem.getWalletClients();
-
-  // Replace with actually deployed addresses
-  let privaMailSepolia = "0x9f0c2fe0b68ed82c85219726aa2681c87ee041a9";
-  let privaMailSapphire = "0xe25a1713210D0421788d18c7559BeA4B094eaa2c";
 
   const {
     network: { name: selectedNetwork },
@@ -42,7 +42,10 @@ async function main() {
   ]);
 
   console.log(
-    `tx to enroll remote router on chainId ${selectedNetwork}: ${txResult}`
+    `🔄 enrolling remote router on chainId ${selectedNetwork}. Tx: ${txResult}`
+  );
+  console.log(
+    `🔌 Connected to user at address ${routerAddress} on ${selectedNetwork}`
   );
 }
 main().catch((error) => {
