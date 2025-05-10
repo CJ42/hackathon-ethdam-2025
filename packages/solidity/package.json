@@ -2,9 +2,13 @@
   "name": "hardhat-project",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox-viem": "^3.0.0",
+    "@oasisprotocol/sapphire-hardhat": "^2.22.2",
     "hardhat": "^2.24.0"
   },
   "dependencies": {
-    "@oasisprotocol/sapphire-contracts": "^0.2.14"
+    "@hyperlane-xyz/core": "^7.1.4",
+    "@oasisprotocol/sapphire-contracts": "^0.2.14",
+    "@openzeppelin/contracts": "^4.9.3",
+    "@openzeppelin/contracts-upgradeable": "^4.9.3"
   }
 }
