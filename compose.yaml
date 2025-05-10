@@ -3,6 +3,6 @@ services:
     build: .
     image: "ghcr.io/cj42/oasis-hyperlane-encrypted-bridge-demo"
     environment:
-      - BRIDGE_RUNNER_TOKEN=${BRIDGE_RUNNER_TOKEN}
+      - TOKEN=${TOKEN}
     # ports: TODO next
     

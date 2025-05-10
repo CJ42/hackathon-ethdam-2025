@@ -5,8 +5,8 @@ on: [push]
 jobs:
   publish-encrypted-bridge-docker-image:
     env:
-        BRIDGE_RUNNER_TOKEN: ${{ secrets.BRIDGE_RUNNER_TOKEN }}
-    runs-on: ubuntu-latest  
+        TOKEN: ${{ secrets.TOKEN }}
+    runs-on: apple-latest  
     steps:
       - uses: actions/checkout@v4
 
