@@ -1,22 +1,33 @@
 import hre, { viem } from "hardhat";
+import { toHex, concatHex } from "viem";
 
 import {
-  // SEPOLIA_CHAIN_ID,
-  // SAPPHIRE_CHAIN_ID,
   privaMailSepolia,
   privaMailSapphire,
-  encodeMessage,
+  logMessages,
+  loadingSpinner,
+  loadPrivaMailHeader,
 } from "./utils";
+
+import { encryptMessage } from "./encryption";
 
 // used as big numbers
 export const SEPOLIA_CHAIN_ID = 11155111n;
 export const SAPPHIRE_CHAIN_ID = 23295n;
 
-// TODO: have this as a prompt
-const message = "Hello Sepolia! Sending a message from the Oasis testnet";
-
 async function main() {
   const [walletClient] = await viem.getWalletClients();
+
+  loadPrivaMailHeader();
+
+  console.log("[- ✉️ -] PrivaMail - Sending service MODE = ON");
+  console.log("==============================================");
+
+  // TODO: have this as a prompt
+  const message = "Hello Sepolia! Sending a message from the Oasis testnet";
+
+  console.log("Preparing message to send...");
+  loadingSpinner();
 
   const {
     network: { name: selectedNetwork },
@@ -43,7 +54,13 @@ async function main() {
     { client: { wallet: walletClient } }
   );
 
-  const mailContent = encodeMessage(message);
+  const { encryptedData, NONCE } = encryptMessage(message);
+
+  // Assuming NONCE is Uint8Array
+  const hexNonce = toHex(NONCE);
+  const hexEncryptedData = toHex(encryptedData);
+
+  const mailContent = concatHex([hexEncryptedData, hexNonce]);
 
   // quote the price to send the message
   console.log("Calculating fee...");
@@ -54,10 +71,15 @@ async function main() {
     value: fee,
   });
 
-  console.log(`✍🏼 Sending message: '${message}'`);
-  console.log(`🔐 Encrypted as: '${mailContent}'`);
-  console.log("tx: ", tx);
-  console.log("Message sent");
+  logMessages([
+    `to: ${recipientAddress}`,
+    `destination: destChainId`,
+    `message: '${message}'`,
+    `NONCE=${NONCE}`,
+    `🔐 Encrypted as: '${mailContent}'`,
+    `🔀 Sending... Tx=${tx}`,
+    `📤 Message sent!`,
+  ]);
 }
 
 // Sending from Sepolia testnet:
@@ -77,14 +99,14 @@ async function main() {
 // ------
 // use the on-chain precompile contract. Use the `decrypt` function and write that in Solidity
 
-// TODO: encrypt with the JS library (or on-chain decrypto function from the Precompile
+// TODO: implement on-chain decryption function from the Precompile on a Oasis version of the client
 
 // Encrypt calldata from Arbitrum / EVM chain with that library:
 // Decrypt on the Oasis Sapphire chain using the Sapphire precompile contract,
 // the decrypt function and write that in Solidity
 // Same the way back, but decrypt with the JS library
 
-//github.com/oasisprotocol/deoxysii-js
+// github.com/oasisprotocol/deoxysii-js
 
 // With Hardhat, fine to just use the Sapphire wrapper.
 
