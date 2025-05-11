@@ -78,24 +78,31 @@ export const decodeMessage = (data: Uint8Array | Hex) => {
 };
 
 export function logMessages(messages: string[]) {
-  console.log("============================");
+  console.log("||======================================================||");
 
   messages.forEach((message) => {
     console.log("||--> ", message);
   });
 
-  console.log("============================");
+  console.log("||======================================================||");
 }
 
 // TODO: this is not working
-export function loadingSpinner() {
+export function startSpinner(text = "Waiting ...", closingText = "Closing...") {
   const spinner = ["-", "\\", "|", "/"];
   let spinnerIndex = 0;
-  const interval = setInterval((current) => {
-    console.log(`\r${spinner[spinnerIndex]}`);
-    current = (spinnerIndex + 1) % spinner.length;
+
+  const interval = setInterval(() => {
+    process.stdout.write(`\r${spinner[spinnerIndex]} ${text}`);
+    spinnerIndex = (spinnerIndex + 1) % spinner.length;
   }, 150);
   clearInterval(interval);
+
+  // Stop after durationMs
+  return () => {
+    clearInterval(interval);
+    process.stdout.write(`\r${closingText}\n"`); // Optional: final message
+  };
 }
 
 export function loadPrivaMailHeader() {

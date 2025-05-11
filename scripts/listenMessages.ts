@@ -7,7 +7,7 @@ import {
   privaMailSepolia,
   privaMailSapphire,
   logMessages,
-  loadingSpinner,
+  startSpinner,
   loadPrivaMailHeader,
 } from "./utils";
 
@@ -53,8 +53,12 @@ async function main() {
 
   console.log("[- 📡 -] PrivaMail - Receiving service MODE = ON");
   console.log("==============================================");
-  console.log("listening for messages...");
-  loadingSpinner();
+
+  const stopSpinner = startSpinner(
+    "Listening for messages...",
+    `📥 New message received!`
+  );
+  console.log(">>> PrivaMail Receiver Started");
 
   // Listen for incoming messages
   publicClient.watchContractEvent({
@@ -62,6 +66,8 @@ async function main() {
     address: clientContractAddress as `0x${string}`, // optional filter
     eventName: "ReceivedMail", //
     onLogs: (logs) => {
+      // stop the spinner as soon as we receive a message
+      stopSpinner();
       const latestMessage = logs[0];
 
       // Assuming NONCE is Uint8Array
@@ -78,7 +84,6 @@ async function main() {
 
       const decryptedMessage = decryptMessage(encryptedMessage, NONCE);
 
-      console.log(`📥 New message received!`);
       logMessages([
         `from: ${sender}`,
         `source: ${origin}`,
@@ -86,6 +91,9 @@ async function main() {
         `🔐 Encrypted message: ${encryptedMessage}`,
         `🔍 Decrypted message: ${decryptedMessage}`,
       ]);
+
+      // keep the process alive
+      process.stdin.resume();
     },
   });
 }

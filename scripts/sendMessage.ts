@@ -1,5 +1,6 @@
 import hre, { viem } from "hardhat";
 import { toHex, concatHex } from "viem";
+import * as readline from "readline";
 
 import {
   privaMailSepolia,
@@ -15,6 +16,20 @@ import { encryptMessage } from "./encryption";
 export const SEPOLIA_CHAIN_ID = 11155111n;
 export const SAPPHIRE_CHAIN_ID = 23295n;
 
+function promptUser(query: string): Promise<string> {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+
+  return new Promise((resolve) =>
+    rl.question(query, (answer) => {
+      rl.close();
+      resolve(answer);
+    })
+  );
+}
+
 async function main() {
   const [walletClient] = await viem.getWalletClients();
 
@@ -23,11 +38,14 @@ async function main() {
   console.log("[- ✉️ -] PrivaMail - Sending service MODE = ON");
   console.log("==============================================");
 
-  // TODO: have this as a prompt
-  const message = "Hello Sepolia! Sending a message from the Oasis testnet";
+  // ✅ Prompt user and wait for input
+  const answer = await promptUser("Enter the message you would like to send: ");
+  const message =
+    answer.length === 0
+      ? "Hello Sepolia! Sending a message from the Oasis testnet"
+      : answer;
 
   console.log("Preparing message to send...");
-  loadingSpinner();
 
   const {
     network: { name: selectedNetwork },
