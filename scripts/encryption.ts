@@ -15,6 +15,8 @@ const associatedData = new Uint8Array([0x1, 0x2, 0x3]);
 const aead = new AEAD(SHARED_KEY);
 
 // Encryption
+/// @return encryptedData
+/// @return NONCE (to be re-used for decryption)
 export const encryptMessage = (message: string) => {
   const NONCE = crypto.getRandomValues(new Uint8Array(NonceSize)); // Generate fresh nonce
 
@@ -27,11 +29,11 @@ export const encryptMessage = (message: string) => {
 
 // Decryption
 export const decryptMessage = (data: Uint8Array, nonce: Uint8Array) => {
-  console.log("Data to decrypt: ", data);
+  // console.log("Data to decrypt: ", data);
   try {
     const decrypted = aead.decrypt(nonce, data, associatedData);
     const toMessage = new TextDecoder().decode(decrypted);
-    console.log("Decrypted data: ", toMessage);
+    // console.log("Decrypted data: ", toMessage);
     return toMessage;
   } catch (error) {
     console.error("Decryption failed:", error);
@@ -43,12 +45,12 @@ async function main() {
 
   // Encrypt
   const { encryptedData: ciphertext, NONCE } = encryptMessage(text);
-  console.log("Encrypted data:", ciphertext);
+  // console.log("Encrypted data:", ciphertext);
 
   // Decrypt
   try {
     const decrypted = decryptMessage(ciphertext, NONCE);
-    console.log("Decrypted data:", decrypted);
+    // console.log("Decrypted data:", decrypted);
   } catch (error) {
     console.error("Decryption failed:", error);
   }
