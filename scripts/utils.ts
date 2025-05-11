@@ -1,8 +1,8 @@
 import { stringToHex, hexToString, type Hex } from "viem";
 
 // Replace with actually deployed addresses
-export const privaMailSepolia = "0x2646bb9e13640d1ed99da52a581ca16cdd064467";
-export const privaMailSapphire = "0x3bf4C8B0785392Ab88b1125e4A218Fd77B99a1eB";
+export const privaMailSepolia = "0x151e50eba474db209b489ccf4696ad2964695ae2";
+export const privaMailSapphire = "0x951F2152aDe514b7C6cC313105cC7DCABAa4EAb8";
 
 // Deployed Hyperlane Mailboxes addresses
 export const MAILBOX_SAPPHIRE_TESTNET =

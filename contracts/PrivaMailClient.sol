@@ -124,7 +124,7 @@ contract PrivaMailClient is HyperlaneRouter {
         });
 
         // interactions...
-        _dispatch(destinationDomain, bytes(_message));
+        _dispatch(destinationDomain, message);
     }
 
     /// @notice Handles receiving of messages

@@ -33,12 +33,12 @@ async function main() {
     eventName: "ReceivedMail", //
     onLogs: (logs) => {
       console.log("Received new message!");
-      console.log(logs);
+      // console.log(logs);
 
       const latestMessage = logs[0];
 
       console.log(
-        `from: ${latestMessage.args.sender}; source: ${latestMessage.args.origin}`
+        `from: ${latestMessage.args.sender} \n source: ${latestMessage.args.origin} \n`
       );
       console.log(`message: ${decodeMessage(latestMessage.args.message)}`);
     },

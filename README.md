@@ -18,8 +18,8 @@ Below are some of the smart contracts from the demo videos deployed on Ethereum 
 
 | Network                            | Contract          | Address                                                                                                                                       |
 | :--------------------------------- | :---------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| Ethereum Sepolia                   | `PrivaMailClient` | [`0x2646bb9e13640d1ed99da52a581ca16cdd064467`](https://sepolia.etherscan.io/address/0x2646bb9e13640d1ed99da52a581ca16cdd064467#code)          |
-| Sapphire Testnet                   | `PrivaMailClient` | [`0x3bf4C8B0785392Ab88b1125e4A218Fd77B99a1eB`](https://explorer.oasis.io/testnet/sapphire/address/0x3bf4C8B0785392Ab88b1125e4A218Fd77B99a1eB) |
+| Ethereum Sepolia                   | `PrivaMailClient` | [`0x151e50eba474db209b489ccf4696ad2964695ae2`](https://sepolia.etherscan.io/address/0x151e50eba474db209b489ccf4696ad2964695ae2#code)          |
+| Sapphire Testnet                   | `PrivaMailClient` | [`0x951F2152aDe514b7C6cC313105cC7DCABAa4EAb8`](https://explorer.oasis.io/testnet/sapphire/address/0x951F2152aDe514b7C6cC313105cC7DCABAa4EAb8) |
 | Sepolia / Sapphire Testnet Relayer |                   | `0xc064f535c1E0c2642326446070a10d0452cCf5fF`                                                                                                  |
 | Trusted ISM (Sepolia)              |                   | `0xb6d1b1bc9aa558484dac793bfbf511b23352f664`                                                                                                  |
 | Trusted ISM (Sapphire Testnet)     |                   | `0xBb7482a8821d9940Ea17CC657Fe64FdDE29E2d87`                                                                                                  |
@@ -61,6 +61,12 @@ tx to enroll remote router on chainId sapphire-testnet: 0x03a2c8b98ae56a2907364f
 <!-- TODO: Mermaid chart -->
 
 # Setup
+
+First install the dependencies
+
+```bash
+npm i
+```
 
 ## Configurations
 
@@ -119,11 +125,11 @@ Under the hood, this will:
 ```bash
 # <network> = "sepolia" | "sapphire-testnet"
 
-# 📤 Send Messages
-npm run privamail:send -- --network <network>
-
 # 📩 Receive Messages
 npm run privamail:receive -- --network <network>
+
+# 📤 Send Messages
+npm run privamail:send -- --network <network>
 ```
 
 ## Debugging commands
@@ -131,10 +137,8 @@ npm run privamail:receive -- --network <network>
 ### ➡️ Deploy the `TrustedISM` contract
 
 ```bash
-# Sepolia
+# Deploy the ISM contracts
 npx hardhat run scripts/deployIsm.ts --network sepolia
-
-# Oasis
 npx hardhat run scripts/deployIsm.ts --network sapphire-testnet
 ```
 
