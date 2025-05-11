@@ -40,7 +40,11 @@ async function main() {
       console.log(
         `from: ${latestMessage.args.sender} \n source: ${latestMessage.args.origin} \n`
       );
-      console.log(`message: ${decodeMessage(latestMessage.args.message)}`);
+
+      console.log(`🔐 Encrypted message: ${latestMessage.args.message}`);
+      console.log(
+        `🔍 Decrypted message: ${decodeMessage(latestMessage.args.message)}`
+      );
     },
   });
 

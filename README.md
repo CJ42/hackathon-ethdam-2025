@@ -87,7 +87,7 @@ npx hardhat vars set PRIVATE_KEY_SAPPHIRE_TESTNET
 
 ## Background process - Run a Hyperlane relayer
 
-See the instructions under the [`relayer/` package](../relayer/README.md).
+See the instructions under the [`RELAYER.md` file](./RELAYER.md).
 
 You will then need to change the `utils.ts` file with the right relayer address:
 

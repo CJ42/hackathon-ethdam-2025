@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@hyperlane-xyz/core": "^7.1.4",
+    "@oasisprotocol/deoxysii": "^0.0.6",
     "@oasisprotocol/sapphire-contracts": "^0.2.14",
     "@openzeppelin/contracts": "^4.9.3",
     "@openzeppelin/contracts-upgradeable": "^4.9.3"

@@ -1,5 +1,4 @@
 import hre, { viem } from "hardhat";
-import { stringToHex } from "viem";
 
 import {
   // SEPOLIA_CHAIN_ID,
@@ -7,7 +6,6 @@ import {
   privaMailSepolia,
   privaMailSapphire,
   encodeMessage,
-  decodeMessage,
 } from "./utils";
 
 // used as big numbers
@@ -15,8 +13,7 @@ export const SEPOLIA_CHAIN_ID = 11155111n;
 export const SAPPHIRE_CHAIN_ID = 23295n;
 
 // TODO: have this as a prompt
-const message =
-  "Hello Oasis network! Sending a message from the Sepolia testnet";
+const message = "Hello Sepolia! Sending a message from the Oasis testnet";
 
 async function main() {
   const [walletClient] = await viem.getWalletClients();
@@ -46,18 +43,19 @@ async function main() {
     { client: { wallet: walletClient } }
   );
 
-  const mailContent = stringToHex(message);
-  console.log("sending mail content: ", mailContent);
+  const mailContent = encodeMessage(message);
 
   // quote the price to send the message
   console.log("Calculating fee...");
   let fee = await contract.read.quoteDispatch([destChainId, mailContent]);
   console.log(`Fee: ${fee} ETH`);
-  console.log("Sending message...");
+
   const tx = await contract.write.sendMessage([destChainId, mailContent], {
     value: fee,
   });
 
+  console.log(`✍🏼 Sending message: '${message}'`);
+  console.log(`🔐 Encrypted as: '${mailContent}'`);
   console.log("tx: ", tx);
   console.log("Message sent");
 }
