@@ -4,7 +4,7 @@
 
 ![Logo PrivaMail](./PrivaMail-logo.png)
 
-> **Demo video 👉🏻🎥**: `...`
+> [**Video Demo 👉🏻🎥**](https://www.loom.com/share/70a4586afb664b8d835a573a1373935d?sid=3414e3df-e404-4a7e-b2a2-5d68289068cd)
 
 PrivaMail is a full-on e2e encrypted messaging protocol over EVM p2p networks.
 
