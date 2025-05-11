@@ -66,10 +66,17 @@ async function main() {
 //   -> encrypt off-chain with JS library on the sender code if the network is sepolia
 //   -> decrypt on the Oasis sapphire chain inside the smart contract code (if domain == SAPPHIRE testnet chain ID)
 
+// This is the flow:
+//
 // Sending from Sapphire testnet:
-//   -> decrypt with JS library on
+//   -> encrypt with JS library on Sapphire
+//   -> the contract receives it encrypted on Sepolia
+//   -> retrieve from the contract's storage or logs
+//   -> decrypt with JS library
 
 // JS Library = https://github.com/oasisprotocol/deoxysii-js
+
+// ------
 // use the on-chain precompile contract. Use the `decrypt` function and write that in Solidity
 
 // TODO: encrypt with the JS library (or on-chain decrypto function from the Precompile

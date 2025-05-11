@@ -17,7 +17,7 @@ export function getMailBoxForNetwork(network: string) {
     return MAILBOX_SAPPHIRE_TESTNET;
   } else {
     throw new Error(
-      "❌ Invalid network (Not supported, only 'abitrum-sepolia' and 'sapphire-testnet'"
+      "❌ Invalid network (Not supported, only 'sepolia' or 'sapphire-testnet'"
     );
   }
 }
@@ -59,9 +59,9 @@ export const ReceivedMailAbi = [
       },
       {
         indexed: false,
-        internalType: "string",
+        internalType: "bytes",
         name: "message",
-        type: "string",
+        type: "bytes",
       },
     ],
     name: "ReceivedMail",
